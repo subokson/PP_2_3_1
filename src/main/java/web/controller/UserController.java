@@ -8,7 +8,7 @@ import web.model.User;
 import web.service.UserService;
 
 @Controller
-@RequestMapping("/index")
+@RequestMapping("/users")
 public class UserController {
 
     private UserService userService;
@@ -20,8 +20,8 @@ public class UserController {
 
     @GetMapping()
     public String index(Model model) {
-        model.addAttribute("index", userService.getAllUsers());
-        return "index";
+        model.addAttribute("users", userService.getAllUsers());
+        return "users";
     }
 
     @GetMapping("/show")
@@ -39,7 +39,7 @@ public class UserController {
     @PostMapping("/create")
     public String create(@ModelAttribute("user") User user) {
         userService.addUser(user);
-        return "redirect:/index";
+        return "redirect:/users";
     }
 
     @GetMapping("/edit")
@@ -51,12 +51,12 @@ public class UserController {
     @PatchMapping("/update")
     public String update(@ModelAttribute("user")User user, @RequestParam("id") long id) {
         userService.updateUser(id, user);
-        return "redirect:/index";
+        return "redirect:/users";
     }
 
     @RequestMapping(value = "/delete", method = RequestMethod.GET)
     public String delete(@RequestParam("id") long id) {
         userService.deleteUser(id);
-        return "redirect:/index";
+        return "redirect:/users";
     }
 }
