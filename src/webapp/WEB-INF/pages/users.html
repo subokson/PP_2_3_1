@@ -21,13 +21,22 @@
         <td th:text="${user.name}"></td>
         <td th:text="${user.surName}"></td>
         <td>
-            <a th:href="@{'/users/show?id=' + ${user.id}}" th:text="Profile">Profile</a>
+            <form th:action="@{'/users/edit?id=' + ${user.id}}" method="post" style="display: inline;">
+                <button type="submit">Edit</button>
+            </form>
+            <form th:action="@{'/users/delete?id=' + ${user.id}}" method="post" onsubmit="return confirm('Want to delete User?');" style="display: inline;">
+                <button type="submit">Delete</button>
+            </form>
         </td>
     </tr>
     </tbody>
 </table>
 
-<p><a th:href="/users/new">Create User</a></p>
+<p>
+    <a th:href="@{'/users/new'}">
+        <button type="button">Create User</button>
+    </a>
+</p>
 
 </body>
 </html>
